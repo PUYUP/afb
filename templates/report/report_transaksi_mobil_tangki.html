@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Lihat Report Transaksi Mobil Tangki</h1>
+  </div>
+  <div class="container">
+    <div class="card-deck mb-3 text-center">
+      <form class="form-inline" method="POST" role="search" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="label mr-2" for="alatberatid">Mobil Tangki</label>
+          {{form.mobilid}}
+        </div>
+
+        <div class="form-group">
+          <label class="label mr-2" for="start_date">Start Date</label>
+          {{form.start_date}}
+        </div>
+
+        <div class="form-group">
+          <label class="label mr-2" for="end_date">End Date</label>
+          {{form.end_date}}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Cari</button>
+      </form>
+    </div>
+    <div class="card-deck mb-3 text-center">
+      <h3>Search result</h3>
+      {% include "report/report_transaksi_mobil_tangki_inner.html" %}
+    </div>
+    {% if object_list %}
+      <div class="text-right">
+        <a href="{% url 'report:export_transaksi_mobil_tangki' %}?{{request.GET.urlencode}}" class="mr-2">Export as PDF</a>
+        <a href="{% url 'report:export_transaksi_mobil_tangki' %}?{{request.GET.urlencode}}&export_csv=1" class="mr-2">Export as CSV</a>
+      </div>
+    {% endif %}
+
+    {% if is_paginated and object_list %}
+		<ul class="pagination">
+            {% if page_obj.has_previous %}
+                {% if page_obj.number == 1 %}
+                    <li class="disabled"><span>⇤</span></li>
+                {% else %}
+                    <li><a class="page-link" href="?mobilid={{ mobilid }}&amp;start_date={{ start_date }}&amp;end_date={{ end_date }}&amp;page=1">⇤</a></li>
+                {% endif %}
+			
+				<li><a class="page-link" href="?mobilid={{ mobilid }}&amp;start_date={{ start_date }}&amp;end_date={{ end_date }}&amp;page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+			{% endif %}
+			
+			{% for i in proper_paginate %}
+				{% if page_obj.number == i %}
+					<li class="page-link active bg-primary text-white">
+                        <span>{{ i }} <span class="sr-only">(current)</span></span>
+                    </li>
+				{% else %}
+					<li><a class="page-link" href="?mobilid={{ mobilid }}&amp;start_date={{ start_date }}&amp;end_date={{ end_date }}&amp;page={{ i }}">{{ i }}</a></li>
+				{% endif %}
+			{% endfor %}
+			
+			{% if page_obj.has_next %}
+				<li><a class="page-link" href="?mobilid={{ mobilid }}&amp;start_date={{ start_date }}&amp;end_date={{ end_date }}&amp;page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            
+                {% if page_obj.number == paginator.num_pages %}
+                    <li class="disabled"><span>⇥</span></li>
+                {% else %}
+                    <li><a class="page-link" href="?mobilid={{ mobilid }}&amp;start_date={{ start_date }}&amp;end_date={{ end_date }}&amp;page={{ paginator.num_pages }}">⇥</a></li>
+                {% endif %}
+            {% endif %}
+		</ul>
+	{% endif %}
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function(){
+      var start_date = document.querySelector('input[name="start_date"]')
+      var end_date = document.querySelector('input[name="end_date"]')
+
+      start_date.DatePickerX.init({
+        format: "dd-mm-yyyy"
+      });
+
+      end_date.DatePickerX.init({
+        format: "dd-mm-yyyy"
+      });
+
+    });
+  </script>
+
+{% endblock %}

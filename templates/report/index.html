@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+{% block content %}
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Lihat Report</h1>
+  </div>
+
+	<div class="container">
+		<div class="mb-3 text-center row">
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+				<div class="card box-shadow h-100">
+					<div class="card-header" style="background-color: rgb(255, 110, 110);">
+						<h4 class="my-0 font-weight-normal"><b>Hour Meter</b></h4>
+					</div>
+					
+					<div class="card-body">
+						<a href="{% url 'report:hour_meter' %}">
+							<i class="fa fa-clock-o fa-3x"></i>
+						</a>
+
+						<ul class="list-unstyled mt-3 mb-4">
+							<li>Lihat Report Hour Meter</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+				<div class="card box-shadow h-100">
+					<div class="card-header" style="background-color: rgb(255, 110, 110);">
+						<h4 class="my-0 font-weight-normal"><b>Servis Alat Berat</b></h4>
+					</div>
+					
+					<div class="card-body">
+					<a href="{% url 'report:biaya_per_alat' %}">
+							<i class="fa fa-dashboard fa-3x"></i>
+						</a>
+
+						<ul class="list-unstyled mt-3 mb-4">
+							<li>Lihat Report Biaya Servis per Alat Berat</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+				<div class="card box-shadow h-100">
+					<div class="card-header" style="background-color: rgb(255, 110, 110);">
+						<h4 class="my-0 font-weight-normal"><b>Servis per Tanggal</b></h4>
+					</div>
+					
+					<div class="card-body">
+						<a href="{% url 'report:biaya_per_tanggal' %}">
+							<i class="fa fa-calendar fa-3x"></i>
+						</a>
+
+						<ul class="list-unstyled mt-3 mb-4">
+							<li>Lihat Report Biaya Servis Alat Berat per Tanggal</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+				<div class="card box-shadow h-100">
+					<div class="card-header" style="background-color: rgb(255, 110, 110);">
+						<h4 class="my-0 font-weight-normal"><b>BBM Alat Berat</b></h4>
+					</div>
+					
+					<div class="card-body">
+						<a href="{% url 'report:bbm_ab' %}">
+							<i class="fa fa-tint fa-3x"></i>
+						</a>
+
+						<ul class="list-unstyled mt-3 mb-4">
+							<li>Lihat Report BBM Alat Berat</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="mb-3 text-center row">
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+				<div class="card box-shadow h-100">
+					<div class="card-header" style="background-color: rgb(255, 110, 110);">
+						<h4 class="my-0 font-weight-normal"><b>Tangki Induk</b></h4>
+					</div>
+					
+					<div class="card-body">
+					<a href="{% url 'report:transaksi_tangki_induk' %}">
+							<i class="fa fa-bus fa-3x"></i>
+						</a>
+
+						<ul class="list-unstyled mt-3 mb-4">
+							<li>Lihat Report Transaksi Tangki Induk</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+				<div class="card box-shadow h-100">
+					<div class="card-header" style="background-color: rgb(255, 110, 110);">
+						<h4 class="my-0 font-weight-normal"><b>Transaksi Mobil Tangki</b></h4>
+					</div>
+					
+					<div class="card-body">
+						<a href="{% url 'report:transaksi_mobil_tangki' %}">
+							<i class="fa fa-truck fa-3x"></i>
+						</a>
+
+						<ul class="list-unstyled mt-3 mb-4">
+							<li>Lihat Report Biaya Transaksi Mobil Tangki</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		
+			<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+				<div class="card box-shadow h-100">
+					<div class="card-header" style="background-color: rgb(255, 110, 110);">
+						<h4 class="my-0 font-weight-normal"><b>Hasil Produksi</b></h4>
+					</div>
+					
+					<div class="card-body">
+						<a href="{% url 'report:hasil_produksi' %}">
+							<i class="fa fa-industry fa-3x"></i>
+						</a>
+
+						<ul class="list-unstyled mt-3 mb-4">
+							<li>Lihat Report Hasil Produksi</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

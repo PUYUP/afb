@@ -1,0 +1,42 @@
+{% extends 'mainmenu/base.html' %}
+
+{% block content %}
+
+
+<form class="form-horizontal">
+
+<h2>Sign In</h2>
+
+<fieldset>
+
+<div class="form-group">
+  <label class="col-md-3 control-label" for="userid">User ID</label>
+  <div class="col-md-4">
+  <input id="userid" name="userid" type="text" placeholder="" class="form-control input-md" required="">
+  <span class="help-block">Masukkan userid anda</span>
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="passwordinput">Your Password</label>
+  <div class="col-md-4">
+    <input id="passwordinput" name="passwordinput" type="password" placeholder="" class="form-control input-md" required="">
+    <span class="help-block">Password</span>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Sign In</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+
+</div>
+
+{% endblock %}

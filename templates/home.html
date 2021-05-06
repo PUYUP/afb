@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Selamat Datang</h1>
+</div>
+<div class="container">
+  <div class="mb-3 text-center row">
+	<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+		<div class="card mb-4 box-shadow h-100">
+			<div class="card-header" style="background-color: rgb(255, 110, 110);">
+				<h4 class="my-0 font-weight-normal"><b>Tangki Induk</b></h4>
+			</div>
+			
+			<div class="card-body"><img src="{% static 'pistol.png' %}" height="128" width="128" style="">
+				<ul class="list-unstyled mt-3 mb-4">
+					<li>Input Pemakaian<br>Tangki Induk</li>
+				</ul>
+				
+				<p><a class="btn btn-lg btn-block btn-primary" href="{% url 'bbm:add_transaksi_tangki_induk' %}" role="button" style="background-color: rgb(255, 110, 110)">Click</a></p>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+		<div class="card mb-4 box-shadow h-100">
+			<div class="card-header" style="background-color: rgb(255, 110, 110);">
+				<h4 class="my-0 font-weight-normal"><b>Mobil Tangki</b></h4>
+			</div>
+			
+			<div class="card-body"><img src="{% static 'pistol.png' %}" height="128" width="128" style="">
+				<ul class="list-unstyled mt-3 mb-4">
+					<li>Input Pemakaian<br>Mobil Tangki</li>
+				</ul>
+				
+				<p><a class="btn btn-lg btn-block btn-primary" href="{% url 'bbm:add_transaksi_mobil_tangki' %}" role="button" style="background-color: rgb(255, 110, 110)">Click</a></p>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+		<div class="card mb-4 box-shadow h-100">
+			<div class="card-header" style="background-color: rgb(255, 110, 110);">
+				<h4 class="my-0 font-weight-normal"><b>Service</b></h4>
+			</div>
+			
+			<div class="card-body"><img src="{% static 'service.png' %}" height="128" width="128" style="">
+				<ul class="list-unstyled mt-3 mb-4">
+					<li>Input Biaya Service <br>Alat Berat</li>
+				</ul>
+				
+				<p><a class="btn btn-lg btn-block btn-primary" href="{% url 'alatberat:add_biaya_ab' %}" role="button" style="background-color: rgb(255, 110, 110)">Click</a></p>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+		<div class="card mb-4 box-shadow h-100">
+			<div class="card-header" style="background-color: rgb(255, 110, 110);">
+				<h4 class="my-0 font-weight-normal"><b>Hour Meter</b></h4>
+			</div>
+			
+			<div class="card-body"><img src="{% static 'hourmeter.png' %}" height="128" width="128" style="">
+				<ul class="list-unstyled mt-3 mb-4">
+					<li>Input<br>Hour Meter</li>
+				</ul>
+				
+				<p><a class="btn btn-lg btn-block btn-primary" href="{% url 'alatberat:add_hour_meter' %}" role="button" style="background-color: rgb(255, 110, 110)">Click</a></p>
+			</div>
+		</div>
+	</div>
+	
+    {% if user.is_staff %}
+		<div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
+			<div class="card mb-4 box-shadow h-100">
+				<div class="card-header" style="background-color: rgb(255, 110, 110);">
+					<h4 class="my-0 font-weight-normal"><b>Admin Area</b></h4>
+				</div>
+				
+				<div class="card-body"><img src="{% static 'admin.jpg'%}" height="128" width="128" style="">
+					<ul class="list-unstyled mt-3 mb-4">
+						<li>Input<br>Admin</li>
+					</ul>
+					
+					<p><a class="btn btn-lg btn-block btn-primary" href="{% url 'admin:index' %}" role="button" style="background-color: rgb(255, 110, 110)">Click</a></p>
+				</div>
+			</div>
+		</div>
+    {% endif %}
+
+  </div>
+
+</div>
+
+{% endblock %}

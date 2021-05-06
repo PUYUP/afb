@@ -1,0 +1,121 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="stylesheet" href="{% static 'datepicker/dist/css/DatePickerX.min.css' %}">
+    <script src="{% static 'datepicker/dist/js/DatePickerX.min.js' %}"></script>
+    {% block extra_head %}{% endblock %}
+
+    <title>{% block title %}AFB Application{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'assets/css/styles.css' %}">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom mb-4">
+		<div class="container">
+			<div class="flex-grow-1 navbar-date">{% now "l j F Y" %}</div>
+			<a class="navbar-brand font-weight-bold mx-auto" href="{% url 'home' %}">PT. AFB</a>
+			
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-expand" aria-controls="navbar-expand" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbar-expand">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link text-dark" href="{% url 'home' %}">Home</a>
+					</li>
+					
+					<li class="nav-item">
+						<a class="nav-link text-dark" href="{% url 'help' %}">Help</a>
+					</li>
+					
+					{% if user.is_authenticated %}
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="{% url 'logout' %}">Logout</a>
+						</li>
+					{% else %}
+						<li class="nav-item">
+							<a class="nav-link text-dark" href="{% url 'login' %}">Login</a>
+						</li>
+					{% endif %}
+					
+					<li class="nav-item">
+						<a class="nav-link text-dark" href="{% url 'report:index' %}">Report</a>
+					</li>
+					
+					{% if user.is_staff %}
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'admin:index' %}">Admin</a>
+						</li>
+					{% endif %}
+				</ul>
+			</div> <!-- /.collapse menu -->
+		</div>
+	</nav> <!-- /.navbar -->
+
+    <div class="container">
+		{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+					<div class="alert alert-{% if message.tags == 'error' %}danger{% elif message.tags == 'success' %}success{% endif %} alert-dismissible">
+						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						{{message}}
+					</div>
+				{% endfor %}
+			</ul>
+      {% endif %}
+    </div>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 col-md">
+					<img class="mb-2" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
+					<small class="d-block mb-3 text-muted"><h5>© 2019</h5></small>
+				</div>
+				
+				<div class="col-6 col-md">
+					<h5>Features</h5>
+					<ul class="list-unstyled text-small">
+					<li><a class="text-muted" href="http://www.google.com" target="_blank">Google</a></li>
+					<li><a class="text-muted" href="http://www.usrparts.com/" target="_blank">Komatsu Parts</a></li>
+					<li><a class="text-muted" href="#">Team feature</a></li>
+					</ul>
+				</div>
+			</div>
+        </div> <!-- /.container -->
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+      Holder.addTheme('thumb', {
+        bg: '#55595c',
+        fg: '#eceeef',
+        text: 'Thumbnail'
+      });
+    </script>
+
+
+</body>
+</html>

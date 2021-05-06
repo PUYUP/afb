@@ -1,0 +1,33 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Nomor</th>
+      <th>Tanggal</th>
+      <th>Hasil</th>
+      <th>Keterangan</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if object_list %}
+      {% for obj in object_list%}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{obj.tanggal}}</td>
+          <td>{{obj.hasil}}</td>
+          <td>{% if obj.keterangan %}{{obj.keterangan}}{% else %}-{% endif %}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="4">No Data</td>
+      </tr>
+    {% endif %}
+  </tbody>
+  <tfoot>
+    <tr>
+      <td class="text-right" colspan="2">Total Hasil</td>
+      <td>{{total_hasil}}</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tfoot>
+</table>

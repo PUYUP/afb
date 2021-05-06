@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Ringkasan Gaji Operator</h1>
+    </div>
+    
+    <div class="container">
+        {{ results_holiday }}
+        {{ reports_obj_holiday }}
+        <div class="table-responsive">
+            <table class="table table-bordered small">
+                <thead>
+                    <tr class="text-uppercase font-weight-bold table-warning">
+                        <th class="align-middle">OPERATOR</th>
+                        <th class="align-middle">ALAT BERAT</th>
+                        <th class="align-middle">BASIC</th>
+                        <th class="align-middle">SHIFT</th>
+                        <th class="align-middle" colspan="3">UANG HADIR/Perhari</th>
+                        <th class="align-middle" colspan="3">HM/Perjam</th>
+                        <th class="align-middle" colspan="3">OT/Hari</th>
+                        <th class="align-middle" colspan="3">MINGGU/ HARI RAYA</th>
+                        <th class="align-middle">BPJS</th>
+                        <th class="align-middle">TOTAL</th>
+                        <th class="align-middle">GAJI BERSIH</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in reports_obj_result %}
+                        <tr data-role="PAGI">
+                            <th rowspan="2" class="align-middle">
+                                {{ item.data_item.operatorid__namaoperator }}
+                            </th>
+
+                            <th rowspan="2" class="align-middle">
+                                {{ item.data_item.alatid__namaalat }}
+                            </th>
+
+                            <th rowspan="2" class="align-middle">
+                                {{ item.data_item.operatorid__basicsalary }}
+                            </th>
+
+                            <td>PAGI</td>
+                            <td>{{ item.data_shift.1.total_hadir }}</td>
+                            <td>{{ item.data_shift.1.operatorid__hadirpagi }}</td>
+                            <td>{{ item.data_shift.1.total_uang_hadirpagi }}</td>
+
+                            <td>{{ item.data_shift.1.total_jam }}</td>
+                            <td>{{ item.data_shift.1.alatid__hargahm }}</td>
+                            <td>{{ item.data_shift.1.total_uang_jam|floatformat:'2' }}</td>
+                            <td>{{ item.data_shift.1.total_ot }}</td>
+                            <td>{{ item.data_shift.1.alatid__hargaot }}</td>
+                            <td>{{ item.data_shift.1.total_uang_ot|floatformat:'2' }}</td>
+                            
+                            <td rowspan="2" class="align-middle">
+                                {{ item.data_holiday.kerja_hari_libur }}
+                            </td>
+
+                            <td rowspan="2" class="align-middle">
+                                {{ item.data_item.operatorid__mingguraya }}
+                            </td>
+                            
+                            <td rowspan="2" class="align-middle">
+                                {{ item.data_holiday.total_uang_libur }}
+                            </td>
+
+                            <td rowspan="2" class="align-middle">
+                                {{ item.data_item.operatorid__bpjs }}
+                            </td>
+                        </tr>
+
+                        <tr data-role="MALAM">
+                            <td>MALAM</td>
+                            <td>{{ item.data_shift.0.total_hadir }}</td>
+                            <td>{{ item.data_shift.0.operatorid__hadirmalam }}</td>
+                            <td>{{ item.data_shift.0.total_uang_hadirmalam }}</td>
+
+                            <td>{{ item.data_shift.0.total_jam }}</td>
+                            <td>{{ item.data_shift.0.alatid__hargahm }}</td>
+                            <td>{{ item.data_shift.0.total_uang_jam|floatformat:'2' }}</td>
+                            <td>{{ item.data_shift.0.total_ot }}</td>
+                            <td>{{ item.data_shift.0.alatid__hargaot }}</td>
+                            <td>{{ item.data_shift.0.total_uang_ot|floatformat:'2' }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!--
+        <table class="table table-bordered">
+            {% for item in cendol %}
+                <tr>
+                    <td>{{ item.shift }}</td>
+                    <td>{{ item.operatorid__namaoperator }}</td>
+                    <td>{{ item.total_hadir }}</td>
+                    <td>{{ item.operatorid__hadirpagi }}</td>
+                    <td>{{ item.operatorid__hadirmalam }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr class="text-uppercase">
+                    <th>Operator</th>
+                    <th>ALAT BERAT</th>
+                    <th>Basic</th>
+                </tr>
+            </thead>
+
+            {% for item in reports_obj %}
+                <tr>
+                    <td>{{ item.operatorid__namaoperator }}</td>
+                    <td>{{ item.alatid__namaalat }}</td>
+                    <td>{{ item.operatorid__basicsalary }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        -->
+    </div>
+{% endblock %}

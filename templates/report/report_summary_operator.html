@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">Ringkasan Laporan Operator</h1>
+    </div>
+
+    <div class="container">
+        <form class="form-inline mb-4" action="" metdod="POST" role="search">
+            {% csrf_token %}
+            
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="form-group">
+                        <label class="label" for="alatberatid">Alat Berat</label>
+                        {{form.alatid}}
+                    </div>
+                </div>
+                
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="form-group">
+                        <label class="label" for="operatorid">Operator</label>
+                        {{form.operatorid}}
+                    </div>
+                </div>
+                
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="form-group">
+                        <label class="label" for="start_date" data="{{ start_date }}">Start Date</label>
+                        {{form.start_date}}
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="form-group">
+                        <label class="label" for="end_date" data="{{ end_date }}">End Date</label>
+                        {{form.end_date}}
+                    </div>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <button type="submit" class="btn btn-primary pr-4 pl-4">Cari</button>
+                </div>
+            </div>
+        </form>
+ 
+        {% if reports_obj %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="table-warning">
+                        <td colspan="2">Nama Operator</td>
+                        <td colspan="6" id="label_operator" class="font-weight-bold">: </td>
+                    </tr>
+
+                    <tr class="table-warning">
+                        <td colspan="2">Nama Alat</td>
+                        <td colspan="6" id="label_alat" class="font-weight-bold">: </td>
+                    </tr>
+
+                    <tr class="table-warning">
+                        <td colspan="2">Tanggal</td>
+                        <td colspan="6" class="font-weight-bold">: {{ start_date }} &mdash; {{ end_date }}</td>
+                    </tr>
+
+                    <tr class="text-uppercase table-secondary">
+                        <th>TGL</th>
+                        <th>HM AWAL</th>
+                        <th>HM AKHIR</th>
+                        <th>TTL JAM</th>
+                        <th>HM DUNIA</th>
+                        <th>OT</th>
+                        <th>Shift</th>
+                        <th>Ket</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for item in reports_obj %}
+                        <tr>
+                            <td>{{ item.tanggal }}</td>
+                            <td>{{ item.total_hmawal }}</td>
+                            <td>{{ item.total_hmakhir }}</td>
+                            <td>{{ item.total_jam }}</td>
+                            <td>{{ item.hmdunia }}</td>
+                            <td>{{ item.ot }}</td>
+                            <td>{{ item.shift }}</td>
+                            <td>{{ item.keterangan }}</td>
+                        </tr>
+                    {% endfor %}
+
+                    <tr class="text-uppercase font-weight-bold table-success">
+                        <td>Total</td>
+                        <td>{{ reports_obj_row.total_hmawal_row }}</td>
+                        <td>{{ reports_obj_row.total_hmakhir_row }}</td>
+                        <td>{{ reports_obj_row.total_jam_row }}</td>
+                        <td>{{ reports_obj_row.total_hmdunia_row }}</td>
+                        <td colspan="3">{{ reports_obj_row.total_ot_row }}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="table-warning">
+                        <td colspan="6" class="font-weight-bold text-uppercase">Summary</td>
+                    </tr>
+            
+                    <tr class="text-uppercase table-secondary">
+                        <th>Shift</th>
+                        <th>Hadir</th>
+                        <th>TTL JAM</th>
+                        <th>HM DUNIA</th>
+                        <th>OT</th>
+                        <th>Hari Libur</th>
+                    </tr>
+                </thead>
+            
+                <tbody>
+                    {% for item in reports_obj_summary %}
+                        <tr>
+                            <td>{{ item.shift }}</td>
+                            <td>{{ item.total_hadir }}</td>
+                            <td>{{ item.total_jam }}</td>
+                            <td>{{ item.total_hmdunia }}</td>
+                            <td>{{ item.total_ot }}</td>
+                            <td>{{ total_minggu }}</td>
+                        </tr>
+                    {% endfor %}
+
+                    <tr class="text-uppercase font-weight-bold table-success">
+                        <td>Total</td>
+                        <td>{{ reports_obj_summary_total.total_hadir }}</td>
+                        <td>{{ reports_obj_summary_total.total_jam }}</td>
+                        <td>{{ reports_obj_summary_total.total_hmdunia }}</td>
+                        <td colspan="2">{{ reports_obj_summary_total.total_ot }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        {% else %}
+            <div class="alert bg-warning text-center">Data tidak ditemukan.</div>
+        {% endif %}
+    </div>
+
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', function () {
+            var start_date = document.querySelector('input[name="start_date"]')
+            var start_date_value = document.querySelector('label[for="start_date"]').getAttribute('data');
+
+            var end_date = document.querySelector('input[name="end_date"]')
+            var end_date_value = document.querySelector('label[for="end_date"]').getAttribute('data');
+
+            var operator = document.querySelector('select[name="operatorid"] option[selected=""]').label;
+            var alat = document.querySelector('select[name="alatid"] option[selected=""]').label;
+
+            if (document.querySelector('#label_operator') !== null) {
+                document.querySelector('#label_operator').innerHTML = ': ' + operator;
+                document.querySelector('#label_alat').innerHTML = ': ' + alat;
+            }
+
+            start_date.DatePickerX.init({
+                format: "dd-mm-yyyy"
+            });
+            start_date.DatePickerX.setValue(start_date_value);
+
+            end_date.DatePickerX.init({
+                format: "dd-mm-yyyy"
+            });
+            end_date.DatePickerX.setValue(end_date_value);
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,43 @@
+/** Override Bootstrap */
+.card-header:first-child {
+    margin-top: -1px;
+    margin-left: -1px;
+    margin-right: -1px;
+}
+
+
+@media (min-width:768px) {
+	.navbar-brand {
+		position: absolute;
+		left: 0;
+		right: 0;
+		width: 100px;
+		text-align: center;
+	}
+}
+
+
+@media (max-width:767px) {
+	/** Navbar */
+	.navbar,
+	.navbar > .container {
+		display: block !important;
+	}
+	
+	.navbar-date {
+		font-size: 14px;
+		margin-bottom: -5px;
+	}
+	
+	.navbar-toggler {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+	}
+	
+	
+	/** Card */
+	.card-header > h4 {
+		font-size: 17px;
+	}
+}
